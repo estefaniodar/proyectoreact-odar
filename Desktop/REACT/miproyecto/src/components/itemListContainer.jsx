@@ -1,6 +1,6 @@
 import React from 'react'
 
-function itemListContainer(props) {
+function ItemListContainer(props) {
   
   return (
     <div>
@@ -9,4 +9,4 @@ function itemListContainer(props) {
   )
 }
 
-export default itemListContainer
+export default ItemListContainer

@@ -1,8 +1,7 @@
-/* eslint-disable no-unused-vars */
 
 import './App.css';
 
-import itemListContainer from './components/itemListContainer';
+import ItemListContainer from './components/ItemListContainer';
 import Navbar from './components/Navbar';
 
 
@@ -11,7 +10,7 @@ function App() {
     
     <div>
       <Navbar></Navbar>
-      <itemListContainer greeting="Hola CoderHouse"></itemListContainer>
+      <ItemListContainer greeting="Bienvenidos a React " ></ItemListContainer>
   
     </div>
     
