@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react';
-import ItemList from './ItemList';
+import ItemDetail from './ItemDetail';
 import { useParams } from 'react-router-dom';
 
 const BaseData =[{
@@ -75,46 +75,49 @@ const BaseData =[{
   "stock": 146
 },]
 
-function Datos (categoryid){
-  return new Promise((resolve, reject) =>{
-  
-    setTimeout( () =>{
-      if(categoryid === undefined){
-        resolve(BaseData);
-      } else{
-        const categoriaRequerida = BaseData.filter(item=>{
-          return item.categoria === categoryid;
-        })
-        resolve(categoriaRequerida);
-      }
-    }, 800);
-  })
-}
 
+function ItemDetailContainer(props) {
 
-function ItemListContainer(props) {
-  const [items, setItems] = useState([]);
-  const {categoryid} = useParams();
+    const {id}= useParams([]);
 
+    let datosRequeridos = new Promise ((resolve, reject) =>{
+        setTimeout(()=>{
+            const itemSolicitado = BaseData.find(item =>{
+                return item.id === Number(id);
+            })
+            resolve(itemSolicitado);
+        }, 800)
+    
+    })
+
+    const [item,setItem] = useState([]);
     useEffect(
     () =>{
-      let datosRequeridos = Datos(categoryid);
+
       datosRequeridos.then( (datosResolve)=>{
-      setItems(datosResolve);
+      setItem(datosResolve);
      })
       .finally(() =>{
         console.log("termino")
       })
     },
-      [categoryid]
-  );
+      [id]);
   
   return (
-    <div>
-      <h1>{props.greeting}</h1>
-      <ItemList data={items}/>
-    </div>
+    <>
+        <div>
+            <h1>{props.greeting}</h1>
+            <ItemDetail 
+                id={item.id}
+                nombre={item.nombre}
+                precio={item.precio}
+                stock={item.stock}
+                categoria={item.categoria}
+                imagen={item.imagen}
+                />
+        </div>
+    </>
   )
 }
 
-export default ItemListContainer
+export default ItemDetailContainer
