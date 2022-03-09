@@ -37,11 +37,4 @@
   }
 }
 
-.card{
-  display:flex;
-  flex-direction:column;
-  margin-bottom: 50px;
-  padding: 25px;
-  box-shadow: 15px 8px 12px rgb(208, 204, 243);
-}
 
