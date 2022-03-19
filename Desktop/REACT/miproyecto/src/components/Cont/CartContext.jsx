@@ -12,8 +12,24 @@ export function CartContextProvider({children}){
     function clearCart(){
         setItemsCart([]);
     }
+    function countItemsinCart(){
+        let totalItems= 0;
+        itemsCart.forEach(item => totalItems += item.qty)
+        return totalItems;
+    }
+
+    function getTotalPrice(){
+        let totalPrice= 0;
+        itemsCart.forEach(item => totalPrice += item.qty * item.precio)
+        return totalPrice;
+    }
+
+    function removeItem(idDelete){
+        setItemsCart (itemsCart.filter(item => item.id !== idDelete))
+
+    }
     return(
-        <CartContext.Provider value={{addItem, itemsCart, clearCart}}>
+        <CartContext.Provider value={{addItem, countItemsinCart, getTotalPrice, removeItem, itemsCart, clearCart}}>
          {children}
         </CartContext.Provider>
     )
