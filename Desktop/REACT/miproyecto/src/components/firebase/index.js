@@ -1,6 +1,6 @@
 
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore/lite";
+import { getDocs, getFirestore, collection, query, where } from "firebase/firestore/lite";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA7vJmKwrt98fp4fmEC7BEsIGKzMpCSxH0",
@@ -12,4 +12,28 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const BaseData = getFirestore(app);
+export const db = getFirestore(app);
+
+export async function getAllProducts(){
+  const miColec = collection(db, "productos");
+  const productosSnap= await getDocs(miColec);
+
+  const result = productosSnap.docs.map(item =>{
+    return{ ...item.data(), id: item.id}
+  });
+
+  return result;
+
+}
+
+export async function getAllProductsFrom(category){
+  const miColec = collection(db,"productos");
+  const myquery = query(miColec, where("categoria", "==", category));
+
+  const productosSnap = await getDocs(myquery);
+
+  const result = productosSnap.docs.map(item =>{
+    return {...item.data(), id: item.id}
+  });
+  return result;
+}

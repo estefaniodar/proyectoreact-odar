@@ -5,13 +5,13 @@ import CartContext from '../Cont/CartContext';
 import {Link} from 'react-router-dom';
 
 
-function ItemDetail({item, nombre, imagen, precio, stock}) {
+function ItemDetail({nombre, imagen, precio, stock}) {
   const { addItem}=useContext(CartContext);
 
   const [isInCart, setIsInCart]=useState(false)
 
   function addToCart(qty){
-    addItem(item, qty);
+    addItem({nombre, imagen, precio, stock}, qty);
     setIsInCart(true);
   }
   return (
@@ -22,7 +22,7 @@ function ItemDetail({item, nombre, imagen, precio, stock}) {
         <p><small>Productos disponibles de primera calidad: {stock}</small></p>
         <hr/> 
         {isInCart ?
-          <Link to="./Cart" type="button" className="mt-4 btn btn-danger">Terminar Compra</Link>
+          <Link to="/Cart" type="button" className="mt-4 btn btn-warning">Terminar Compra</Link>
           :
           <ItemCount addToCart={addToCart} stock={stock}/>
         }

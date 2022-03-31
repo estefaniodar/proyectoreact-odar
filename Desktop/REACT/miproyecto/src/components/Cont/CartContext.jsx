@@ -20,7 +20,7 @@ export function CartContextProvider({children}){
 
     function getTotalPrice(){
         let totalPrice= 0;
-        itemsCart.forEach(item => totalPrice += item.qty * item.precio)
+        itemsCart.forEach(item => totalPrice += item.qty * item.precios)
         return totalPrice;
     }
 

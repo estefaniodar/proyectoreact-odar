@@ -12,6 +12,8 @@ import CartView from "./components/Cart/CartView";
 function App() {
   return (
 
+    <div className="App">
+  
     <CartContextProvider>
       <BrowserRouter>
         <Navbar></Navbar>
@@ -29,6 +31,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </CartContextProvider>
+    </div>
 
 
 
